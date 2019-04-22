@@ -1,6 +1,8 @@
 package com.carl;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
  public class Theatre {
@@ -19,36 +21,48 @@ import java.util.List;
     }
 
     public boolean reserveSeat(String seatNumber){
-        Seat seatRequested = null;  //creates a Seat with the value of null
-
-        for (Seat seat : seats) { //foreach checks the full length of an array
-            if (seat.getSeatNumber().equals(seatNumber)){
-                seatRequested = seat;   //fills in the null value for the Seat created earlier
-                seatRequested.reserveSeat();    //calls the reserveSeat method from the Seat class
-                return true;
-            }
-        }
-
-        if (seatRequested == null){
-            System.out.println("Seat number: " + seatNumber + " does not exist");
+        Seat seatRequested = new Seat(seatNumber);
+        int foundSeat = Collections.binarySearch(seats,seatRequested,null);
+        if (foundSeat>=0){
+           return seats.get(foundSeat).reserveSeat();
+        }else{
+            System.out.println("Seat number: " +seatNumber + " does not exist");
             return false;
         }
-
-        return false;
+//        for (Seat seat : seats) { //foreach checks the full length of an array
+//            if (seat.getSeatNumber().equals(seatNumber)){
+//                seatRequested = seat;   //fills in the null value for the Seat created earlier
+//                seatRequested.reserveSeat();    //calls the reserveSeat method from the Seat class
+//                return true;
+//            }
+//        }
+//
+//        if (seatRequested == null){
+//            System.out.println("Seat number: " + seatNumber + " does not exist");
+//            return false;
+//        }
     }
 
     public boolean cancelSeat(String seatNumber){
-        Seat seatRequested = null;
-
-        for (Seat seat: seats) {
-            if (seat.getSeatNumber().equals(seatNumber)){
-                seatRequested = seat;
-                return seatRequested.cancel();
-            }
+        Seat seatRequested = new Seat(seatNumber);
+        int foundSeat = Collections.binarySearch(seats,seatRequested,null);
+        if (foundSeat>=0){
+            return seats.get(foundSeat).cancel();
+        }else{
+            System.out.println("Seat number: " + seatNumber + " does not exist");
+            return false;
         }
-
-        System.out.println("Seat number: " + seatNumber + " does not exist");
-        return false;
+//        Seat seatRequested = null;
+//
+//        for (Seat seat: seats) {
+//            if (seat.getSeatNumber().equals(seatNumber)){
+//                seatRequested = seat;
+//                return seatRequested.cancel();
+//            }
+//        }
+//
+//        System.out.println("Seat number: " + seatNumber + " does not exist");
+//        return false;
     }
 
     public void getSeats() {
@@ -63,13 +77,18 @@ import java.util.List;
 
 
 
-    private class Seat{
+    private class Seat implements Comparable<Seat>{
         private final String seatNumber;
         private boolean reserved;
 
         private Seat(String seatNumber) {
             this.seatNumber = seatNumber;
             this.reserved = false;
+        }
+
+        @Override
+        public int compareTo(Seat seat) {
+            return this.seatNumber.compareToIgnoreCase(seat.seatNumber);
         }
 
         public boolean reserveSeat(){

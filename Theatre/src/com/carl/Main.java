@@ -7,10 +7,10 @@ public class Main {
 
         Theatre Empire = new Theatre("Empire",9,12);
 
-        //Empire.getSeats();
-        Empire.reserveSeat("A02");
-        Empire.cancelSeat("A02");
-        Empire.reserveSeat("A02");
+//        Empire.getSeats();
+        Empire.reserveSeat("A01");
+        Empire.cancelSeat("A01");
+        Empire.reserveSeat("B09");
         //System.out.println( Empire.getTheatreName());
     }
 }
