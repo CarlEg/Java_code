@@ -7,7 +7,7 @@ import java.util.List;
 
  public class Theatre {
     private final String theatreName;
-    public List<Seat> seats = new ArrayList<>();
+    private List<Seat> seats = new ArrayList<>();
 
     public Theatre(String theatreName, int numRows, int seatsPerRow) {
         this.theatreName = theatreName;
@@ -15,6 +15,7 @@ import java.util.List;
         for (char row = 'A'; row<=lastRow; row++ ){
             for (int i =1; i<=seatsPerRow; i++){
                 Seat seat = new Seat(row + String.format("%02d",i));
+                if (i< seatsPerRow-4 || i>4)
                 seats.add(seat);
             }
         }
@@ -67,8 +68,10 @@ import java.util.List;
 
     public void getSeats() {
         for (Seat seat: seats) {
-            System.out.println(seat.getSeatNumber());
+            System.out.print(" " + seat.getSeatNumber());
         }
+        System.out.println(" ");
+        System.out.println("====================");
     }
 
     public String getTheatreName() {
@@ -77,9 +80,10 @@ import java.util.List;
 
 
 
-    public class Seat implements Comparable<Seat>{
+    private class Seat implements Comparable<Seat>{
         private final String seatNumber;
         private boolean reserved;
+        private double price;
 
         private Seat(String seatNumber) {
             this.seatNumber = seatNumber;
@@ -113,8 +117,20 @@ import java.util.List;
             }
         }
 
-        public String getSeatNumber() {
+        private String getSeatNumber() {
             return seatNumber;
+        }
+
+        public boolean isReserved() {
+            return reserved;
+        }
+
+        public double getPrice() {
+            return price;
+        }
+
+        public void setPrice(double price) {
+            this.price = price;
         }
     }
 }
