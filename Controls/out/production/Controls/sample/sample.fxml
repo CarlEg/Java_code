@@ -1,0 +1,52 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<GridPane fx:controller="sample.Controller"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
+    <Button GridPane.rowIndex="0" GridPane.columnIndex="0" text="Click me pleeeeeeeaaaaaassssse" textFill="brown" wrapText="true">
+        <font>
+            <Font name="Arial italic" size="12"/>
+        </font>
+        <graphic>
+            <ImageView>
+                <Image url="@/toolbarButtonGraphics/general/TipOfTheDay24.gif"/>
+            </ImageView>
+        </graphic>
+    </Button>
+    <Label GridPane.rowIndex="1" GridPane.columnIndex="0" text="I am a label">
+        <graphic>
+            <ImageView>
+                <Image url="@/toolbarButtonGraphics/general/Search24.gif"/>
+            </ImageView>
+        </graphic>
+    </Label>
+
+    <fx:define>
+        <ToggleGroup fx:id="colourToggleGroup"/>
+    </fx:define>
+    <RadioButton GridPane.rowIndex="2" GridPane.columnIndex="0" text="Red" toggleGroup="$colourToggleGroup"/>
+    <RadioButton GridPane.rowIndex="2" GridPane.columnIndex="1" text="Blue" toggleGroup="$colourToggleGroup"/>
+    <RadioButton GridPane.rowIndex="2" GridPane.columnIndex="2" text="Green" toggleGroup="$colourToggleGroup"/>
+    <ComboBox GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="This is Option 1"/>
+                <String fx:value="This is Option 2"/>
+                <String fx:value="This is Option 3"/>
+                <String fx:value="This is Option 4"/>
+                <String fx:value="This is Option 5"/>
+            </FXCollections>
+        </items>
+    </ComboBox>
+</GridPane>
